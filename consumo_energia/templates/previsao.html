@@ -1,33 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Previsão de Consumo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f3f3eb;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        img {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        select, input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>Previsão de Consumo por Região</h1>
+    <div class="container">
+        <h1>Previsão de Consumo por Região</h1>
+        <a href="/">Ir para Cálculo de consumo</a>
+        <img src="/static/img.png" alt="Mapa do Brasil">
 
-    <form method="POST" action="/previsao">
-        <label for="ano">Ano para Previsão:</label>
-        <input type="number" id="ano" name="ano" required>
-
-        <label for="regiao">Região:</label>
-        <select id="regiao" name="regiao" required>
-            <option value="Norte">Norte</option>
-            <option value="Nordeste">Nordeste</option>
-            <option value="Sudeste">Sudeste</option>
-            <option value="Sul">Sul</option>
-            <option value="Centro-Oeste">Centro-Oeste</option>
-        </select>
-
-        <button type="submit">Prever</button>
-    </form>
-
-    <!-- Mostrar o resultado da previsão -->
-    {% if previsao is not none %}
-    <h2>Previsão de Consumo:</h2>
-    <p>Para a região <strong>{{ regiao }}</strong> no ano <strong>{{ ano }}</strong>, o consumo previsto é de <strong>{{ previsao | int | tojson }}</strong> kWh.</p>
-    {% endif %}
+        <form method="POST" action="/previsao">
+            <div>
+                <label for="ano">Qual ano você deseja?:</label>
+                <input type="number" id="ano" name="ano" required>
+            </div>
+            <div>
+                <label for="regiao">Escolha a região:</label>
+                <select id="regiao" name="regiao" required>
+                    <option value="#"> </option>
+                    <option value="Norte">Norte</option>
+                    <option value="Nordeste">Nordeste</option>
+                    <option value="Sudeste">Sudeste</option>
+                    <option value="Sul">Sul</option>
+                    <option value="Centro-Oeste">Centro-Oeste</option>
+                </select>
+            </div>
+            <button type="submit">Preveja o consumo</button>
+        </form>
+        {% if previsao is not none %}
+        <div id="resultado">
+            Previsão de consumo na região <strong>{{ regiao }}</strong> para o ano <strong>{{ ano }}</strong>:
+            {{ previsao | int | tojson }} kWh
+        </div>
+        {% endif %}
+    </div>
 </body>
 </html>

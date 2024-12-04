@@ -34,12 +34,13 @@
 <body>
     <div class="container">
         <h1>Consumo de Energia por Região</h1>
+        <a href="/previsao">Ir para Previsão de Consumo</a>
         <img src="/static/mapa_brasil.png" alt="Mapa do Brasil">
         <form method="POST" action="/calcular">
             <div>
                 <label for="regiao">Escolha a região:</label>
                 <select name="regiao" id="regiao">
-                    <option value="#">---</option>
+                    <option value="#"> </option>
                     <option value="Norte">Norte</option>
                     <option value="Nordeste">Nordeste</option>
                     <option value="Sudeste">Sudeste</option>
@@ -50,7 +51,7 @@
             <div>
                 <label for="ano">Escolha o ano:</label>
                 <select name="ano" id="ano">
-                    <option value="#">---</option>
+                    <option value="#"> </option>
                     <option value="2004">2004</option>
                     <option value="2005">2005</option>
                     <option value="2006">2006</option>
