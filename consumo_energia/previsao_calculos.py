@@ -9,7 +9,7 @@ def calcular_previsao_consumo(ano, regiao, arquivo_excel='consumo_geral_v2.xlsx'
     # Agrupar por ano para obter o consumo total anual por região
     df_agrupado = df_regiao.groupby("Ano")["Valor"].sum().reset_index()
 
-    # Regressão linear
+    # variaveis para Regressão linear
     X = df_agrupado["Ano"].values.reshape(-1, 1)
     y = df_agrupado["Valor"].values
 
@@ -18,4 +18,9 @@ def calcular_previsao_consumo(ano, regiao, arquivo_excel='consumo_geral_v2.xlsx'
 
     # Fazer a previsão para o ano solicitado
     previsao = modelo.predict(np.array([[ano]]))[0]
+
+    # Calcular o R^2 (acurácia do modelo)
+    r2_score = modelo.score(X, y)
+    print(r2_score)
+
     return round(previsao, 2)
